@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Header from "./Header";
-
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Footer from './Footer';
 
 const API_KEY = '1b11e86fce3eb8f1a1e20560088e9801';
 const MovieCard = ({ movie }) => {
@@ -15,6 +17,11 @@ const MovieCard = ({ movie }) => {
         <div className="card-body">
           <h5 className="card-title">{movie.title}</h5>
           <p className="card-text">{movie.overview}</p>
+          <Link to={`/movie-collection/movie/${movie.id}`}>
+            <div className='viewButton'>
+              <Button className='mb-2'>Explore More</Button>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
@@ -27,7 +34,7 @@ function MovieList() {
 
 
   const searchMovies = async (searchQuery) => {
-    if (!searchQuery) return fetchMovies(); // If search query is empty, show trending movies
+    if (!searchQuery) return fetchMovies(); 
     try {
       const res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}`);
       setMovies(res.data.results);
@@ -42,7 +49,7 @@ function MovieList() {
   //       const response = await fetch(
   //         'https://api.themoviedb.org/3/movie/now_playing?api_key=1b11e86fce3eb8f1a1e20560088e9801'
   //       );
-  // https://api.themoviedb.org/3/movie/550?api_key=1b11e86fce3eb8f1a1e20560088e9801
+  // 
   //       if (!response.ok) {
   //         throw new Error("Failed to fetch data");
   //       }
@@ -80,10 +87,12 @@ function MovieList() {
       <div className='row'>
         {movies.length > 0 ? (
           movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+
         ) : (
           <h4 className="text-center">No movies found.</h4>
         )}
       </div>
+      <Footer />
     </div>
   )
 }
