@@ -17,8 +17,9 @@ function App() {
 
 <Router>
 <Routes>
-  <Route path='/movie-collection' element={<MovieList/>}/>
-  <Route path='/movie-collection/movie/:movieId' element={<MovieDetails/>}/>     
+<Route path="/" element={<MovieList />} />
+<Route path="/explore-movies" element={<MovieList />} />
+  <Route path='//movie/:movieId' element={<MovieDetails/>}/>     
 </Routes>
 </Router>
   )
