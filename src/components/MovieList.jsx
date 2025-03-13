@@ -17,7 +17,7 @@ const MovieCard = ({ movie }) => {
         <div className="card-body">
           <h5 className="card-title">{movie.title}</h5>
           <p className="card-text">{movie.overview}</p>
-          <Link to={`/movie-collection/movie/${movie.id}`}>
+          <Link to={`/movie/${movie.id}`}>
             <div className='viewButton'>
               <Button className='mb-2'>Explore More</Button>
             </div>
